@@ -202,7 +202,7 @@ abstract class AbstractRelatedProductTable extends AbstractTable
         $isActive = (bool)array_intersect(static::DB_BOOLEAN_TRUE_VALUES, $states);
 
         $statusName = $isActive ? 'Active' : 'Inactive';
-        $statusCssClass = $isActive ? 'label-info' : 'label-danger';
+        $statusCssClass = $isActive ? 'label-success' : 'label-danger';
 
         return $this->generateLabel($statusName, $statusCssClass);
     }
