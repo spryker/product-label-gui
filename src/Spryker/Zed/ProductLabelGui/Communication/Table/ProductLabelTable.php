@@ -85,9 +85,6 @@ class ProductLabelTable extends AbstractTable
      */
     protected $queryContainer;
 
-    /**
-     * @param \Spryker\Zed\ProductLabelGui\Persistence\ProductLabelGuiQueryContainerInterface $queryContainer
-     */
     public function __construct(ProductLabelGuiQueryContainerInterface $queryContainer)
     {
         $this->queryContainer = $queryContainer;
@@ -269,11 +266,6 @@ class ProductLabelTable extends AbstractTable
         return $this->generateLabel($statusName, $statusCssClass);
     }
 
-    /**
-     * @param \Orm\Zed\ProductLabel\Persistence\SpyProductLabel $productLabelEntity
-     *
-     * @return string
-     */
     protected function getStoreNames(SpyProductLabel $productLabelEntity): string
     {
         $storeNames = [];
@@ -340,11 +332,6 @@ class ProductLabelTable extends AbstractTable
         );
     }
 
-    /**
-     * @param int $idProductLabel
-     *
-     * @return string
-     */
     protected function createDeleteButton(int $idProductLabel): string
     {
         return $this->generateRemoveButton(

@@ -81,12 +81,6 @@ class EditController extends AbstractController
         return $aggregateForm;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\Form\FormInterface $aggregateForm
-     *
-     * @return void
-     */
     protected function handleProductLabelAggregateForm(Request $request, FormInterface $aggregateForm): void
     {
         $aggregateForm->handleRequest($request);

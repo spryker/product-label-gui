@@ -27,19 +27,11 @@ class ProductLabelTableMock extends ProductLabelTable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function fetchData(): array
     {
         return $this->init()->prepareData($this->config);
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return void
-     */
     public function setTwig(Environment $twig): void
     {
         $this->twig = $twig;

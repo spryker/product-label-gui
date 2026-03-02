@@ -43,21 +43,11 @@ class ProductLabelGuiToProductLabelBridge implements ProductLabelGuiToProductLab
         return $this->productLabelFacade->findAllLabels();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductLabelTransfer $productLabelTransfer
-     *
-     * @return void
-     */
     public function createLabel(ProductLabelTransfer $productLabelTransfer): void
     {
         $this->productLabelFacade->createLabel($productLabelTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductLabelTransfer $productLabelTransfer
-     *
-     * @return void
-     */
     public function updateLabel(ProductLabelTransfer $productLabelTransfer): void
     {
         $this->productLabelFacade->updateLabel($productLabelTransfer);
@@ -85,11 +75,6 @@ class ProductLabelGuiToProductLabelBridge implements ProductLabelGuiToProductLab
         $this->productLabelFacade->removeProductAbstractRelationsForLabel($idProductLabel, $idsProductAbstract);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductLabelTransfer $productLabelTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductLabelResponseTransfer
-     */
     public function removeLabel(ProductLabelTransfer $productLabelTransfer): ProductLabelResponseTransfer
     {
         return $this->productLabelFacade->removeLabel($productLabelTransfer);

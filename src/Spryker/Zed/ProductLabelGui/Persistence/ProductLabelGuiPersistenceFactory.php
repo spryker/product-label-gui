@@ -36,9 +36,6 @@ class ProductLabelGuiPersistenceFactory extends AbstractPersistenceFactory
         return SpyProductLabelProductAbstractQuery::create();
     }
 
-    /**
-     * @return \Orm\Zed\ProductCategory\Persistence\SpyProductCategoryQuery
-     */
     public function getProductCategoryPropelQuery(): SpyProductCategoryQuery
     {
         return $this->getProvidedDependency(ProductLabelGuiDependencyProvider::PROPEL_QUERY_PRODUCT_CATEGORY);

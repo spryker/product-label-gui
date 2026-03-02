@@ -77,12 +77,6 @@ class CreateController extends AbstractController
         return $aggregateForm;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\Form\FormInterface $aggregateForm
-     *
-     * @return \Generated\Shared\Transfer\ProductLabelTransfer|null
-     */
     protected function handleProductLabelAggregateForm(Request $request, FormInterface $aggregateForm): ?ProductLabelTransfer
     {
         $aggregateForm->handleRequest($request);

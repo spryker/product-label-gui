@@ -50,9 +50,6 @@ class ProductLabelTableQueryTest extends Unit
      */
     protected ProductLabelGuiCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -62,9 +59,6 @@ class ProductLabelTableQueryTest extends Unit
         $this->registerFormFactoryServiceMock();
     }
 
-    /**
-     * @return void
-     */
     public function testFetchDataReturnsCorrectProductLabelData(): void
     {
         // Arrange
@@ -92,9 +86,6 @@ class ProductLabelTableQueryTest extends Unit
         $this->assertEquals(1, $result[1][ProductLabelTable::COL_ABSTRACT_PRODUCT_RELATION_COUNT]);
     }
 
-    /**
-     * @return void
-     */
     public function testFetchDataReturnsCorrectProductLabelDataWhenMultipleLabelsDoNotHaveProducts(): void
     {
         // Arrange
@@ -112,17 +103,11 @@ class ProductLabelTableQueryTest extends Unit
         $this->assertCount(3, $result);
     }
 
-    /**
-     * @return void
-     */
     protected function registerTwigServiceMock(): void
     {
         $this->tester->getContainer()->set(static::SERVICE_TWIG, $this->getTwigMock());
     }
 
-    /**
-     * @return void
-     */
     protected function registerFormFactoryServiceMock(): void
     {
         $this->tester->getContainer()->set(static::SERVICE_FORM_FACTORY, $this->getFormFactoryMock());
@@ -143,9 +128,6 @@ class ProductLabelTableQueryTest extends Unit
         return $twigMock;
     }
 
-    /**
-     * @return \Twig\Loader\LoaderInterface
-     */
     protected function getChainLoader(): LoaderInterface
     {
         return new ChainLoader();

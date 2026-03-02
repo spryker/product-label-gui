@@ -11,8 +11,5 @@ use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
 
 interface ProductLabelGuiToProductQueryContainerInterface
 {
-    /**
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     public function queryProductAbstract(): SpyProductAbstractQuery;
 }

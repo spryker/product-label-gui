@@ -57,12 +57,6 @@ class RelatedProductTableQueryBuilder implements RelatedProductTableQueryBuilder
      */
     protected $bundleConfig;
 
-    /**
-     * @param \Spryker\Zed\ProductLabelGui\Dependency\QueryContainer\ProductLabelGuiToProductQueryContainerInterface $productQueryContainer
-     * @param \Spryker\Zed\ProductLabelGui\Persistence\ProductLabelGuiQueryContainerInterface $productLabelGuiQueryContainer
-     * @param \Spryker\Zed\ProductLabelGui\Dependency\Facade\ProductLabelGuiToLocaleInterface $localeFacade
-     * @param \Spryker\Zed\ProductLabelGui\ProductLabelGuiConfig $bundleConfig
-     */
     public function __construct(
         ProductLabelGuiToProductQueryContainerInterface $productQueryContainer,
         ProductLabelGuiQueryContainerInterface $productLabelGuiQueryContainer,

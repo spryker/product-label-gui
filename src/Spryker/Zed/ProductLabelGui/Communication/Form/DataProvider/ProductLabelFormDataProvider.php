@@ -25,10 +25,6 @@ class ProductLabelFormDataProvider
      */
     protected $productLabelFacade;
 
-    /**
-     * @param \Spryker\Zed\ProductLabelGui\Dependency\Facade\ProductLabelGuiToLocaleInterface $localeFacade
-     * @param \Spryker\Zed\ProductLabelGui\Dependency\Facade\ProductLabelGuiToProductLabelInterface $productLabelFacade
-     */
     public function __construct(
         ProductLabelGuiToLocaleInterface $localeFacade,
         ProductLabelGuiToProductLabelInterface $productLabelFacade

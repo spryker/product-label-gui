@@ -23,13 +23,7 @@ interface ProductLabelGuiToLocaleInterface
      */
     public function getLocaleById($idLocale): LocaleTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\LocaleTransfer
-     */
     public function getCurrentLocale(): LocaleTransfer;
 
-    /**
-     * @return string
-     */
     public function getCurrentLocaleName(): string;
 }

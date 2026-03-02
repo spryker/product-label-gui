@@ -65,9 +65,6 @@ class ProductLabelGuiCommunicationFactory extends AbstractCommunicationFactory
         ]);
     }
 
-    /**
-     * @return \Symfony\Component\Validator\Constraint
-     */
     public function createAddIdsProductToAssignConstraint(): Constraint
     {
         return new AddIdsProductToAssignConstraint([
@@ -75,9 +72,6 @@ class ProductLabelGuiCommunicationFactory extends AbstractCommunicationFactory
         ]);
     }
 
-    /**
-     * @return \Symfony\Component\Validator\Constraint
-     */
     public function createAddIdsProductToDeAssignConstraint(): Constraint
     {
         return new AddIdsProductToDeAssignConstraint([
@@ -131,9 +125,6 @@ class ProductLabelGuiCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductLabelGuiDependencyProvider::FACADE_PRODUCT_LABEL);
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
     public function getStoreRelationFormTypePlugin(): FormTypeInterface
     {
         return $this->getProvidedDependency(ProductLabelGuiDependencyProvider::PLUGIN_STORE_RELATION_FORM_TYPE);
@@ -192,9 +183,6 @@ class ProductLabelGuiCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function createProductLabelDeleteForm(): FormInterface
     {
         return $this->getFormFactory()->create(ProductLabelDeleteForm::class);
@@ -237,9 +225,6 @@ class ProductLabelGuiCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductLabelGuiDependencyProvider::FACADE_PRICE_PRODUCT);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductLabelGui\Dependency\Facade\ProductLabelGuiToStoreFacadeInterface
-     */
     public function getStoreFacade(): ProductLabelGuiToStoreFacadeInterface
     {
         return $this->getProvidedDependency(ProductLabelGuiDependencyProvider::FACADE_STORE);

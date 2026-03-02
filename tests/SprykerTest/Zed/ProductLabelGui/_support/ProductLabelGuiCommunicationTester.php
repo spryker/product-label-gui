@@ -33,9 +33,6 @@ class ProductLabelGuiCommunicationTester extends Actor
 {
     use _generated\ProductLabelGuiCommunicationTesterActions;
 
-    /**
-     * @return void
-     */
     public function ensureProductLabelTableIsEmpty(): void
     {
         SpyProductLabelProductAbstractQuery::create()->deleteAll();

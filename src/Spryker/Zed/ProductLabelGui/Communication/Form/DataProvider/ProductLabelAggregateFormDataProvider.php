@@ -21,10 +21,6 @@ class ProductLabelAggregateFormDataProvider
      */
     protected $relatedProductFormDataProvider;
 
-    /**
-     * @param \Spryker\Zed\ProductLabelGui\Communication\Form\DataProvider\ProductLabelFormDataProvider $productLabelFormDataProvider
-     * @param \Spryker\Zed\ProductLabelGui\Communication\Form\DataProvider\RelatedProductFormDataProvider $relatedProductFormDataProvider
-     */
     public function __construct(
         ProductLabelFormDataProvider $productLabelFormDataProvider,
         RelatedProductFormDataProvider $relatedProductFormDataProvider

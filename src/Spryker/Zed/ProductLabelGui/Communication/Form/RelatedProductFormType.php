@@ -42,11 +42,6 @@ class RelatedProductFormType extends AbstractType
      */
     public const FIELD_IDS_PRODUCT_ABSTRACT_TO_DE_ASSIGN_CSV = 'idsProductAbstractToDeAssignCsv';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

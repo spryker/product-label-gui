@@ -22,9 +22,6 @@ class ProductLabelGuiToStoreFacadeBridge implements ProductLabelGuiToStoreFacade
         $this->storeFacade = $storeFacade;
     }
 
-    /**
-     * @return bool
-     */
     public function isDynamicStoreEnabled(): bool
     {
         return $this->storeFacade->isDynamicStoreEnabled();

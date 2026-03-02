@@ -37,11 +37,6 @@ class ProductLabelLocalizedAttributesFormType extends AbstractType
      */
     public const FIELD_NAME = 'name';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

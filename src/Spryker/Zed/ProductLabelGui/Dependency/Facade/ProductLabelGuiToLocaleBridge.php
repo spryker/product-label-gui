@@ -46,9 +46,6 @@ class ProductLabelGuiToLocaleBridge implements ProductLabelGuiToLocaleInterface
             ->getLocaleById($idLocale);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\LocaleTransfer
-     */
     public function getCurrentLocale(): LocaleTransfer
     {
         return $this
@@ -56,9 +53,6 @@ class ProductLabelGuiToLocaleBridge implements ProductLabelGuiToLocaleInterface
             ->getCurrentLocale();
     }
 
-    /**
-     * @return string
-     */
     public function getCurrentLocaleName(): string
     {
         return $this->localeFacade->getCurrentLocaleName();

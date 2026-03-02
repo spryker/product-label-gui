@@ -89,11 +89,6 @@ class ProductLabelFormType extends AbstractType
      */
     protected const VALIDITY_DATE_FORMAT = 'Y-m-d';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

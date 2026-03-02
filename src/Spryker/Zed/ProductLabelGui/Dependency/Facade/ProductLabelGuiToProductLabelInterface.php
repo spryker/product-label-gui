@@ -24,18 +24,8 @@ interface ProductLabelGuiToProductLabelInterface
      */
     public function findAllLabels(): array;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductLabelTransfer $productLabelTransfer
-     *
-     * @return void
-     */
     public function createLabel(ProductLabelTransfer $productLabelTransfer): void;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductLabelTransfer $productLabelTransfer
-     *
-     * @return void
-     */
     public function updateLabel(ProductLabelTransfer $productLabelTransfer): void;
 
     /**
@@ -54,11 +44,6 @@ interface ProductLabelGuiToProductLabelInterface
      */
     public function removeAbstractProductRelationsForLabel($idProductLabel, array $idsProductAbstract): void;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductLabelTransfer $productLabelTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductLabelResponseTransfer
-     */
     public function removeLabel(ProductLabelTransfer $productLabelTransfer): ProductLabelResponseTransfer;
 
     /**

@@ -147,9 +147,6 @@ class RelatedProductOverviewTable extends AbstractRelatedProductTable
         ));
     }
 
-    /**
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     protected function getQuery(): SpyProductAbstractQuery
     {
         return $this->tableQueryBuilder->buildAssignedProductQuery($this->idProductLabel);

@@ -36,11 +36,6 @@ class ProductLabelGuiToMoneyBridge implements ProductLabelGuiToMoneyInterface
             ->fromInteger($price);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\MoneyTransfer $moneyTransfer
-     *
-     * @return string
-     */
     public function formatWithSymbol(MoneyTransfer $moneyTransfer): string
     {
         return $this

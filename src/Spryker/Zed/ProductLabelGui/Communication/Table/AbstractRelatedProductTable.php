@@ -57,12 +57,6 @@ abstract class AbstractRelatedProductTable extends AbstractTable
      */
     protected $idProductLabel;
 
-    /**
-     * @param \Spryker\Zed\ProductLabelGui\Communication\Table\RelatedProductTableQueryBuilderInterface $tableQueryBuilder
-     * @param \Spryker\Zed\ProductLabelGui\Dependency\Facade\ProductLabelGuiToLocaleInterface $localeFacade
-     * @param \Spryker\Zed\ProductLabelGui\Persistence\ProductLabelGuiRepositoryInterface $productLabelGuiRepository
-     * @param int|null $idProductLabel
-     */
     public function __construct(
         RelatedProductTableQueryBuilderInterface $tableQueryBuilder,
         ProductLabelGuiToLocaleInterface $localeFacade,

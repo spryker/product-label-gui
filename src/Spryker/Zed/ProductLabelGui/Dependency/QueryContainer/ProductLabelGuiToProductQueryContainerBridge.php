@@ -24,9 +24,6 @@ class ProductLabelGuiToProductQueryContainerBridge implements ProductLabelGuiToP
         $this->productQueryContainer = $productQueryContainer;
     }
 
-    /**
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     public function queryProductAbstract(): SpyProductAbstractQuery
     {
         return $this

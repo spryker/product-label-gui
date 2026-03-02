@@ -27,25 +27,16 @@ class AddIdsProductToDeAssignConstraint extends Constraint
      */
     protected $productLabelFacade;
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return \Spryker\Zed\ProductLabelGui\Dependency\Facade\ProductLabelGuiToProductLabelInterface
-     */
     public function getProductLabelFacade(): ProductLabelGuiToProductLabelInterface
     {
         return $this->productLabelFacade;
     }
 
-    /**
-     * @return string
-     */
     public function getTargets(): string
     {
         return static::CLASS_CONSTRAINT;

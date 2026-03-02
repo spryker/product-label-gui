@@ -28,9 +28,6 @@ class RelatedProductTableQueryBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildAssignedProductQueryShouldReturnProductsWithLabelGroupedByProductAbstract(): void
     {
         // Arrange
@@ -56,9 +53,6 @@ class RelatedProductTableQueryBuilderTest extends Unit
         $this->assertSame(1, $buildAvailableProductQuery->count());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildAssignedProductQueryShouldReturnProductsWithLabel(): void
     {
         // Arrange
@@ -81,9 +75,6 @@ class RelatedProductTableQueryBuilderTest extends Unit
         $this->assertSame(2, $buildAvailableProductQuery->count());
     }
 
-    /**
-     * @return void
-     */
     public function testBuildAssignedProductQueryShouldReturnEmptyWhenNoProductsAssignToLabel(): void
     {
         // Arrange
