@@ -9,6 +9,7 @@ namespace Spryker\Zed\ProductLabelGui\Communication\Form;
 
 use DateTime;
 use Generated\Shared\Transfer\ProductLabelTransfer;
+use Spryker\Zed\Gui\Communication\Form\Type\DatePickerType;
 use Spryker\Zed\Gui\Communication\Form\Type\FormattedNumberType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -68,6 +69,26 @@ class ProductLabelFormType extends AbstractType
      * @var string
      */
     public const FIELD_VALID_TO_DATE = 'validTo';
+
+    /**
+     * @var string
+     */
+    protected const RANGE_GROUP_VALIDITY = 'product-label-validity';
+
+    /**
+     * @var string
+     */
+    protected const FORMAT_DATE = 'dd.MM.yyyy';
+
+    /**
+     * @var string
+     */
+    protected const LEGACY_VALID_FROM_FIELD_CLASS = 'js-valid-from-date-picker safe-datetime';
+
+    /**
+     * @var string
+     */
+    protected const LEGACY_VALID_TO_FIELD_CLASS = 'js-valid-to-date-picker safe-datetime';
 
     /**
      * @var string
@@ -259,15 +280,8 @@ class ProductLabelFormType extends AbstractType
     {
         $builder->add(
             static::FIELD_VALID_FROM_DATE,
-            DateType::class,
-            [
-                'label' => 'Valid From',
-                'widget' => 'single_text',
-                'required' => false,
-                'attr' => [
-                    'class' => 'js-valid-from-date-picker safe-datetime',
-                ],
-            ],
+            $this->getValidityFieldType(),
+            $this->getValidFromFieldOptions(),
         );
 
         $this->addDateTimeTransformer(static::FIELD_VALID_FROM_DATE, $builder);
@@ -284,15 +298,8 @@ class ProductLabelFormType extends AbstractType
     {
         $builder->add(
             static::FIELD_VALID_TO_DATE,
-            DateType::class,
-            [
-                'label' => 'Valid To',
-                'widget' => 'single_text',
-                'required' => false,
-                'attr' => [
-                    'class' => 'js-valid-to-date-picker safe-datetime',
-                ],
-            ],
+            $this->getValidityFieldType(),
+            $this->getValidToFieldOptions(),
         );
 
         $this->addDateTimeTransformer(static::FIELD_VALID_TO_DATE, $builder);
@@ -364,6 +371,70 @@ class ProductLabelFormType extends AbstractType
         );
 
         return $this;
+    }
+
+    protected function getValidityFieldType(): string
+    {
+        if ($this->isGuiDatePickerTypeAvailable()) {
+            return DatePickerType::class;
+        }
+
+        return DateType::class;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getValidFromFieldOptions(): array
+    {
+        return $this->getValidityFieldOptions(
+            'Valid From',
+            DatePickerType::RANGE_ROLE_START,
+            static::LEGACY_VALID_FROM_FIELD_CLASS,
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getValidToFieldOptions(): array
+    {
+        return $this->getValidityFieldOptions(
+            'Valid To',
+            DatePickerType::RANGE_ROLE_END,
+            static::LEGACY_VALID_TO_FIELD_CLASS,
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getValidityFieldOptions(string $label, string $rangeRole, string $legacyFieldClass): array
+    {
+        $options = [
+            'label' => $label,
+            'required' => false,
+        ];
+
+        if ($this->isGuiDatePickerTypeAvailable()) {
+            return $options + [
+                'range_group' => static::RANGE_GROUP_VALIDITY,
+                'range_role' => $rangeRole,
+                'format' => static::FORMAT_DATE,
+            ];
+        }
+
+        return $options + [
+            'widget' => 'single_text',
+            'attr' => [
+                'class' => $legacyFieldClass,
+            ],
+        ];
+    }
+
+    protected function isGuiDatePickerTypeAvailable(): bool
+    {
+        return class_exists(DatePickerType::class);
     }
 
     /**
