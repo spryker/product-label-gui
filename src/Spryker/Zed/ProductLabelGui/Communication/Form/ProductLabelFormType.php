@@ -373,6 +373,9 @@ class ProductLabelFormType extends AbstractType
         return $this;
     }
 
+    /**
+     * @phpstan-return class-string<\Symfony\Component\Form\FormTypeInterface>
+     */
     protected function getValidityFieldType(): string
     {
         if ($this->isGuiDatePickerTypeAvailable()) {

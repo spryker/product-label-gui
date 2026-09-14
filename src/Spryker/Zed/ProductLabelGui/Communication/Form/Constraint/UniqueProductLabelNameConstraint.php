@@ -21,10 +21,7 @@ class UniqueProductLabelNameConstraint extends Constraint
      */
     protected $queryContainer;
 
-    /**
-     * @return string
-     */
-    public function getTargets()
+    public function getTargets(): string
     {
         return static::CLASS_CONSTRAINT;
     }
