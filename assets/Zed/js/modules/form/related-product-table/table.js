@@ -6,6 +6,7 @@
 'use strict';
 
 var TableHandler = require('./table-handler');
+var tableAccess = require('ZedGuiModules/libs/table/table-access');
 
 /**
  * @param {string} sourceTableSelector
@@ -27,10 +28,10 @@ function create(
     formFieldId,
     onRemoveCallback,
 ) {
-    $(destinationTableSelector).DataTable({ destroy: true });
+    var $sourceTable = $(sourceTableSelector);
 
     var tableHandler = TableHandler.create(
-        $(sourceTableSelector),
+        $sourceTable,
         $(destinationTableSelector),
         labelCaption,
         labelId,
@@ -38,31 +39,40 @@ function create(
         onRemoveCallback,
     );
 
-    $(sourceTableSelector)
-        .DataTable()
-        .on('draw', function (event, settings) {
-            $(checkboxSelector, $(sourceTableSelector)).off('change');
-            $(checkboxSelector, $(sourceTableSelector)).on('change', function () {
-                var $checkbox = $(this);
-                var info = $.parseJSON($checkbox.attr('data-info'));
+    if (!$sourceTable.length) {
+        return tableHandler;
+    }
 
-                if (tableHandler.isCheckboxActive($checkbox)) {
-                    tableHandler.addSelectedProduct(info.id, info.sku, info.name);
-                } else {
-                    tableHandler.removeSelectedProduct(info.id);
-                }
-            });
+    $sourceTable.on('change', checkboxSelector, function () {
+        var $checkbox = $(this);
+        var info = $.parseJSON($checkbox.attr('data-info'));
 
-            for (var i = 0; i < settings.json.data.length; i++) {
-                var product = settings.json.data[i];
-                var idProduct = parseInt(product[1], 10);
+        if (tableHandler.isCheckboxActive($checkbox)) {
+            tableHandler.addSelectedProduct(info.id, info.sku, info.name);
 
-                var selector = tableHandler.getSelector();
-                if (selector.isProductSelected(idProduct)) {
-                    tableHandler.checkCheckbox($('input[value="' + idProduct + '"]', $(sourceTableSelector)));
-                }
-            }
+            return;
+        }
+
+        tableHandler.removeSelectedProduct(info.id);
+    });
+
+    tableAccess.requestTable($sourceTable[0], function (handle) {
+        handle.on('draw', function () {
+            var selector = tableHandler.getSelector();
+
+            handle
+                .raw()
+                .rows()
+                .data()
+                .each(function (item) {
+                    var id = parseInt(item[1], 10);
+
+                    if (selector.isProductSelected(id)) {
+                        tableHandler.checkCheckbox($('input[value="' + id + '"]', $sourceTable));
+                    }
+                });
         });
+    });
 
     return tableHandler;
 }

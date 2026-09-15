@@ -8,10 +8,9 @@
 function ProductSelector() {
     var productSelector = {};
     var selectedProducts = {};
-    var idKey = 'id';
 
-    productSelector.addProductToSelection = function (idProduct) {
-        selectedProducts[idProduct] = idProduct;
+    productSelector.addProductToSelection = function (idProduct, row) {
+        selectedProducts[idProduct] = row;
     };
 
     productSelector.removeProductFromSelection = function (idProduct) {
@@ -26,15 +25,17 @@ function ProductSelector() {
         selectedProducts = {};
     };
 
-    productSelector.addAllToSelection = function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var id = data[i][idKey];
-            selectedProducts[id] = id;
-        }
-    };
-
     productSelector.getSelected = function () {
         return selectedProducts;
+    };
+
+    /**
+     * @return {Array} Rows of everything selected, the table of the selection is built from them.
+     */
+    productSelector.getRows = function () {
+        return Object.keys(selectedProducts).map(function (id) {
+            return selectedProducts[id];
+        });
     };
 
     return productSelector;

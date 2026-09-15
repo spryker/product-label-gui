@@ -6,6 +6,7 @@
 'use strict';
 
 var ProductSelector = require('./product-selector');
+var tableAccess = require('ZedGuiModules/libs/table/table-access');
 
 var CHECKBOX_CHECKED_STATE_CHECKED = 'checked';
 var CHECKBOX_CHECKED_STATE_UN_CHECKED = 'un_checked';
@@ -30,6 +31,7 @@ function TableHandler(sourceTable, destinationTable, labelCaption, labelId, form
     };
 
     var destinationTableProductSelector = ProductSelector.create();
+    var destinationHandle = null;
 
     tableHandler.toggleSelection = function () {
         $('input[type="checkbox"]', sourceTable).each(function (index, checkboxNode) {
@@ -66,49 +68,40 @@ function TableHandler(sourceTable, destinationTable, labelCaption, labelId, form
         if (destinationTableProductSelector.isProductSelected(idProduct)) {
             return;
         }
-        destinationTableProductSelector.addProductToSelection(idProduct);
 
-        destinationTable
-            .DataTable()
-            .row.add([
-                idProduct,
-                decodeURIComponent(String(sku).replace(/\+/g, '%20')),
-                String(name),
-                '<div><a data-id="' + idProduct + '" href="#" class="btn btn-xs remove-item">Remove</a></div>',
-            ])
-            .draw();
+        destinationTableProductSelector.addProductToSelection(idProduct, [
+            idProduct,
+            decodeURIComponent(String(sku).replace(/\+/g, '%20')),
+            String(name),
+            '<div><a data-id="' + idProduct + '" href="#" class="btn btn-xs remove-item">Remove</a></div>',
+        ]);
 
-        $('.remove-item').off('click');
-        $('.remove-item').on('click', onRemoveCallback);
+        tableHandler.renderSelection();
 
         tableHandler.updateSelectedProductsLabelCount();
+    };
+
+    /**
+     * The table of the selection is a view over it and is rebuilt from it, so that it can be
+     * filled whenever the plugin gets round to creating it.
+     */
+    tableHandler.renderSelection = function () {
+        if (!destinationHandle) {
+            return;
+        }
+
+        destinationHandle.raw().clear().rows.add(destinationTableProductSelector.getRows()).draw();
     };
 
     tableHandler.removeSelectedProduct = function (idProduct) {
         idProduct = parseInt(idProduct, 10);
 
-        destinationTable
-            .DataTable()
-            .rows()
-            .every(function (rowIndex, tableLoop, rowLoop) {
-                if (!this.data()) {
-                    return;
-                }
+        if (destinationTableProductSelector.isProductSelected(idProduct)) {
+            destinationTableProductSelector.removeProductFromSelection(idProduct);
+            tableHandler.renderSelection();
+            tableHandler.unCheckCheckbox($('input[value="' + idProduct + '"]', sourceTable));
+        }
 
-                var rowProductId = parseInt(this.data()[0], 10);
-                if (idProduct !== rowProductId) {
-                    return;
-                }
-
-                destinationTableProductSelector.removeProductFromSelection(idProduct);
-
-                this.remove();
-
-                var $checkbox = $('input[value="' + idProduct + '"]', sourceTable);
-                tableHandler.unCheckCheckbox($checkbox);
-            });
-
-        destinationTable.DataTable().draw();
         tableHandler.updateSelectedProductsLabelCount();
     };
 
@@ -180,6 +173,18 @@ function TableHandler(sourceTable, destinationTable, labelCaption, labelId, form
         var checkedState = tableHandler.getInitialCheckboxCheckedState() !== CHECKBOX_CHECKED_STATE_UN_CHECKED;
         $checkbox.prop('checked', checkedState);
     };
+
+    if (destinationTable.length) {
+        destinationTable.on('click', '.remove-item', onRemoveCallback);
+
+        tableAccess.requestTable(destinationTable[0], function (handle) {
+            destinationHandle = handle;
+
+            handle.created().then(function () {
+                tableHandler.renderSelection();
+            });
+        });
+    }
 
     return tableHandler;
 }
