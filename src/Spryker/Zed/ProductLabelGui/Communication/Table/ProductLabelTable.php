@@ -261,7 +261,7 @@ class ProductLabelTable extends AbstractTable
     protected function createStatusMarker($isActive)
     {
         $statusName = $isActive ? 'Active' : 'Inactive';
-        $statusCssClass = $isActive ? 'label-success' : 'label-danger';
+        $statusCssClass = $isActive ? 'label-success' : 'badge-outline-dark';
 
         return $this->generateLabel($statusName, $statusCssClass);
     }
